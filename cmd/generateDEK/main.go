@@ -24,12 +24,14 @@ const (
 	provider          = "aws"
 )
 
+var cmkARN = ""
+
 func main() {
 	uri := os.Getenv("MONGODB_URI")
 	if uri == "" {
 		log.Fatal("MONGODB_URI must be set")
 	}
-	cmkARN := os.Getenv("MONGODB_CMK_ARN")
+	cmkARN = os.Getenv("MONGODB_CMK_ARN")
 	if cmkARN == "" {
 		log.Fatal("MONGODB_CMK_ARN must be set")
 	}
