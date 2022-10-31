@@ -16,7 +16,6 @@ import (
 )
 
 const (
-	cmkARN    = "arn:aws:kms:us-east-1:544093665289:key/53a34587-d6c6-49a4-ab78-2fd506c2ef8d"
 	cmkRegion = "us-east-1"
 
 	keyVaultColl      = "__keyVault"
@@ -30,6 +29,11 @@ func main() {
 	if uri == "" {
 		log.Fatal("MONGODB_URI must be set")
 	}
+	cmkARN := os.Getenv("MONGODB_CMK_ARN")
+	if cmkARN == "" {
+		log.Fatal("MONGODB_CMK_ARN must be set")
+	}
+
 	//keyVaultClient, err := newKeyVaultClient(uri)
 	keyVaultClient, err := common.NewMongoClient(uri, nil)
 	if err != nil {
